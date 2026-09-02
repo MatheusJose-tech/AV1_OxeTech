@@ -6,9 +6,6 @@ class Livros:
         self.categoria = categoria
         self.quantidade = quantidade
         self.estado = ""
-
-
-
 class Estante():
     
     def __init__(self):
@@ -20,9 +17,8 @@ class Estante():
         
         self.livros.append(livro)
 
-    # vou usar a classe biblioteca para fazer o emprestimo, pq ela tem a lista de usuarios e a lista de livros, e a classe estante so tem a lista de livros
-
     def efetivar_emprestimo(self,  id_livro):
+
         for livro in self.livros:
             if livro.id == id_livro:
                 if livro.quantidade > 0:
@@ -35,19 +31,19 @@ class Estante():
         print(f"Livro com ID {id_livro} não encontrado na estante.")
         return False
 
-    def imprimir_livros(self):
+    def efetivar_devolucao(self, id_livro):
+    
+            for livro in self.livros:
 
-        livros_organizados = sorted(self.livros, key=lambda organiza: organiza.id)
+                if livro.id == id_livro:
+                    if livro.quantidade >= 0:
+                        livro.quantidade += 1
+                        print(f"Devolução do livro '{livro.titulo}' realizada com sucesso!")
+                        return True
+                    
+            print(f"Livro com ID {id_livro} não encontrado na estante.")
+            return False
+    
 
-        for livro in livros_organizados:
-            print(f"ID: {livro.id}, Título: {livro.titulo}, Autor: {livro.autor}, Categoria: {livro.categoria}, Quantidade: {livro.quantidade}")
 
 
-
-if __name__ == "__main__":
-    estante = Estante()
-    estante.adicionar_livro(1, "O Senhor dos Anéis", "J.R.R. Tolkien", "Fantasia", 5)
-    estante.adicionar_livro(2, "1984", "George Orwell", "Distopia", 3)
-    estante.adicionar_livro(3, "O Pequeno Príncipe", "Antoine de Saint-Exupéry", "Infantil", 7)
-
-    estante.imprimir_livros()

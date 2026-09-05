@@ -2,8 +2,6 @@
 
 ## 📖 Sobre o Projeto
 
-## 📖 Sobre o Projeto
-
 O **AV1_OxeTech** é um sistema de gerenciamento de biblioteca desenvolvido em **Python** como parte da avaliação do curso **Treinamento de Boas Práticas para o Desenvolvimento de Softwares**, da **OxeTech**.
 
 O projeto foi construído a partir de um **código legado**, inicialmente desenvolvido com diversos problemas de qualidade e manutenção. O objetivo da atividade foi analisar esse código, identificar os problemas existentes e aplicar técnicas de refatoração e boas práticas de desenvolvimento para tornar o sistema mais **organizado, legível, seguro, reutilizável e fácil de manter**, preservando seu comportamento original.

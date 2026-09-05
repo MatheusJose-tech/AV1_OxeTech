@@ -6,7 +6,7 @@
 * **Categoria B (OCP - Aberto/Fechado):** Regras de limite, prazo e multa dependiam de extensas cadeias de `if/elif` hardcoded baseadas em strings (`"comum"`, `"premium"`), dificultando a adição de novos tipos.
 * **Categoria C (Bugs/Tratamento de Erros):** Acesso inseguro a chaves de dicionário no log gerava exceções fatais (`KeyError`) ao processar dados não cadastrados.
 * **Categoria D (DRY - Duplicação de Código):** A verificação do tipo de usuário para aplicar regras de negócio estava duplicada tanto no método de `emprestar` quanto no de `devolver`.
-* **Categoria E (Clean Code/Nomenclatura):** Uso de variáveis com nomes não descritivos (`d`, `u`, `emp`, `t`, `a`) e uso de "Magic Numbers" espalhados pelo código (7, 14, 30, limites numéricos).
+* **Categoria E (Clean Code/Nomenclatura/code smell):** Uso de variáveis com nomes não descritivos (`d`, `u`, `emp`, `t`, `a`) e uso de "Magic Numbers" espalhados pelo código (7, 14, 30, limites numéricos).
 
 ---
 

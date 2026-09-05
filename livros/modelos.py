@@ -6,12 +6,11 @@ class Livros:
         self.autor = autor
         self.categoria = categoria
         self.quantidade = quantidade
-        self.estado = ""
 class Estante():
     
     def __init__(self):
         self.livros = []
-        self.operador = seguranca_operador(self)
+        self.operador = seguranca_operador()
 
     def adicionar_livro(self, id_livro, titulo, autor, categoria, quantidade):
 

@@ -19,7 +19,7 @@ class Biblioteca():
         self.livros = {}
         self.emprestimos = []
         self.estante = Estante()
-        self.operador = seguranca_operador(self)
+        self.operador = seguranca_operador()
         
 
       
@@ -116,6 +116,7 @@ class Biblioteca():
 
             multa = banco.MULTAS[usuario.tipo] * dias_atraso
             self.operador.mensagem_info(f"Valor da multa: R$ {multa:.2f}")
+            self.usuarios
             self.operador.mensagem_info(f"Prosseguindo com a devolução do livro '{livro.titulo}'...")   
 
         if usuario.emprestimos_ativos > 0:

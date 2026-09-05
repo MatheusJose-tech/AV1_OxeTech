@@ -1,11 +1,8 @@
 from seguranca.logger_config import *
 
 class seguranca_operador:
-    def __init__(self, biblioteca):
-        self.biblioteca = biblioteca
 
     # Função para mascarar dados sensíveis
-
     def mascarar_cpf(self, cpf):
         return f"{cpf[:3]}.***.***-{cpf[-2:]}"
 
@@ -23,7 +20,6 @@ class seguranca_operador:
         return f"{nome_usuario_mascarado}@{dominio}"
     
     # Funções de log para diferentes níveis de severidade
-    
     def mensagem_erro(self, mensagem):
         logger.error(mensagem)
 

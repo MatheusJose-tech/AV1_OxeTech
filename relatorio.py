@@ -17,15 +17,6 @@ class Relatorio:
 
             print()
         
-            self.operador.mensagem_info("Relatório de Empréstimos:")
-            for id_usuario, usuario in self.biblioteca.usuarios.items():
-                self.operador.mensagem_info(f"Usuário: {usuario.nome} (ID: {id_usuario})")
-                self.operador.mensagem_info(f"Tipo: {usuario.tipo}")
-                self.operador.mensagem_info(f"Empréstimos Ativos: {usuario.emprestimos_ativos}")
-                self.operador.mensagem_info(f"Bloqueado: {'Sim' if usuario.bloqueado else 'Não'}")
-                self.operador.mensagem_info(f"Multa: R${usuario.multa:.2f}")
-                print("-" * 30)
-
         def gerar_relatorio_resumido(self):
 
             total_usuarios = len(self.biblioteca.usuarios)

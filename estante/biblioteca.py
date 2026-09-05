@@ -116,7 +116,6 @@ class Biblioteca():
 
             multa = banco.MULTAS[usuario.tipo] * dias_atraso
             self.operador.mensagem_info(f"Valor da multa: R$ {multa:.2f}")
-            self.usuarios
             self.operador.mensagem_info(f"Prosseguindo com a devolução do livro '{livro.titulo}'...")   
 
         if usuario.emprestimos_ativos > 0:

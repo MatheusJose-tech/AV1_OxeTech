@@ -2,7 +2,7 @@ from seguranca.operador import seguranca_operador
 class Relatorio:
         def __init__(self, biblioteca):
             self.biblioteca = biblioteca
-            self.operador = seguranca_operador(self.biblioteca)
+            self.operador = seguranca_operador()
             
         
         def gerar_relatorio(self):

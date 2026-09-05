@@ -77,7 +77,7 @@ class Biblioteca():
                     self.operador.mensagem_info(f"Empréstimo realizado com sucesso!\nNome: {usuario.nome}\nCPF: {usuario.cpf}\nTipo: {usuario.tipo}\nVencimento: {vencimento_str}")
                     self.operador.mensagem_info(f"Quantidade de livros restantes na estante: {livro.quantidade}")
         else:
-            self.operador.mensagem_warning("Limite de empréstimos atingido.")
+            self.operador.mensagem_warning(f"Limite de empréstimos do usuário {usuario.nome} atingido.")
 
     def devolver(self, id_usuario, id_livro):
 

@@ -24,7 +24,6 @@ class Estante():
             if livro.id == id_livro:
                 if livro.quantidade > 0:
                     livro.quantidade -= 1
-                    self.operador.mensagem_info(f"Empréstimo do livro '{livro.titulo}' realizado com sucesso!")
                     return True
                 else:
                     self.operador.mensagem_info(f"Não há exemplares disponíveis do livro '{livro.titulo}'.")

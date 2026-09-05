@@ -1,0 +1,94 @@
+2026-09-05 08:03:15,865 - INFO - Empréstimo do livro 'Clean Code' realizado com sucesso!
+2026-09-05 08:03:15,865 - INFO - Empréstimo realizado com sucesso!
+Nome: Ana
+CPF: 111.***.***-44
+Tipo: comum
+Vencimento: 12/09/2026
+2026-09-05 08:03:15,865 - INFO - Quantidade de livros restantes na estante: 1
+2026-09-05 08:03:15,865 - INFO - Empréstimo do livro 'O Hobbit' realizado com sucesso!
+2026-09-05 08:03:15,865 - INFO - Empréstimo realizado com sucesso!
+Nome: Bruno
+CPF: 555.***.***-88
+Tipo: premium
+Vencimento: 19/09/2026
+2026-09-05 08:03:15,866 - INFO - Quantidade de livros restantes na estante: 0
+2026-09-05 08:03:15,866 - INFO - Empréstimo do livro 'SICP' realizado com sucesso!
+2026-09-05 08:03:15,866 - INFO - Empréstimo realizado com sucesso!
+Nome: Carla
+CPF: 999.***.***-66
+Tipo: funcionario
+Vencimento: 05/10/2026
+2026-09-05 08:03:15,866 - INFO - Quantidade de livros restantes na estante: 2
+2026-09-05 08:03:15,866 - INFO - Não há exemplares disponíveis do livro 'O Hobbit'.
+2026-09-05 08:03:15,866 - INFO - Empréstimo do livro 'Livro Extra 1' realizado com sucesso!
+2026-09-05 08:03:15,866 - INFO - Empréstimo realizado com sucesso!
+Nome: Ana
+CPF: 111.***.***-44
+Tipo: comum
+Vencimento: 12/09/2026
+2026-09-05 08:03:15,866 - INFO - Quantidade de livros restantes na estante: 4
+2026-09-05 08:03:15,866 - INFO - Empréstimo do livro 'Livro Extra 2' realizado com sucesso!
+2026-09-05 08:03:15,866 - INFO - Empréstimo realizado com sucesso!
+Nome: Ana
+CPF: 111.***.***-44
+Tipo: comum
+Vencimento: 12/09/2026
+2026-09-05 08:03:15,866 - INFO - Quantidade de livros restantes na estante: 4
+2026-09-05 08:03:15,866 - WARNING - Limite de empréstimos atingido.
+2026-09-05 08:03:15,866 - INFO - Processando devolução: usuário Ana
+CPF: 111.***.***-44
+livro: Clean Code
+ID: L1
+2026-09-05 08:03:15,877 - INFO - Devolução do livro 'Clean Code' realizada com sucesso!
+2026-09-05 08:03:15,877 - INFO - Devolução realizada com sucesso!
+Nome: Ana
+CPF: 111.***.***-44
+Tipo: comum
+2026-09-05 08:03:15,877 - INFO - Quantidade de livros restantes na estante: 2
+2026-09-05 08:03:15,878 - INFO - Processando devolução: usuário Ana
+CPF: 111.***.***-44
+livro: Livro Extra 1
+ID: L4
+2026-09-05 08:03:15,878 - WARNING - Devolução atrasada em 5 dias.
+2026-09-05 08:03:15,878 - INFO - Aplicando multa...
+2026-09-05 08:03:15,878 - INFO - Valor da multa: R$ 10.00
+2026-09-05 08:03:15,878 - INFO - Prosseguindo com a devolução do livro 'Livro Extra 1'...
+2026-09-05 08:03:15,878 - INFO - Devolução do livro 'Livro Extra 1' realizada com sucesso!
+2026-09-05 08:03:15,878 - INFO - Devolução realizada com sucesso!
+Nome: Ana
+CPF: 111.***.***-44
+Tipo: comum
+2026-09-05 08:03:15,878 - INFO - Quantidade de livros restantes na estante: 5
+2026-09-05 08:03:15,878 - INFO - Processando devolução: usuário Bruno
+CPF: 555.***.***-88
+livro: O Hobbit
+ID: L2
+2026-09-05 08:03:15,879 - WARNING - Devolução atrasada em 10 dias.
+2026-09-05 08:03:15,879 - INFO - Aplicando multa...
+2026-09-05 08:03:15,879 - INFO - Valor da multa: R$ 10.00
+2026-09-05 08:03:15,879 - INFO - Prosseguindo com a devolução do livro 'O Hobbit'...
+2026-09-05 08:03:15,879 - INFO - Devolução do livro 'O Hobbit' realizada com sucesso!
+2026-09-05 08:03:15,879 - INFO - Devolução realizada com sucesso!
+Nome: Bruno
+CPF: 555.***.***-88
+Tipo: premium
+2026-09-05 08:03:15,879 - INFO - Quantidade de livros restantes na estante: 1
+2026-09-05 08:03:15,879 - INFO - Processando devolução: usuário Bruno
+CPF: 555.***.***-88
+livro: O Hobbit
+ID: L2
+2026-09-05 08:03:15,879 - ERROR - Não há empréstimos ativos para o usuário Bruno com o livro 'O Hobbit'.
+2026-09-05 08:03:15,879 - INFO - Processando devolução: usuário Carla
+CPF: 999.***.***-66
+livro: SICP
+ID: L3
+2026-09-05 08:03:15,879 - WARNING - Devolução atrasada em 20 dias.
+2026-09-05 08:03:15,879 - INFO - Aplicando multa...
+2026-09-05 08:03:15,879 - INFO - Valor da multa: R$ 0.00
+2026-09-05 08:03:15,879 - INFO - Prosseguindo com a devolução do livro 'SICP'...
+2026-09-05 08:03:15,879 - INFO - Devolução do livro 'SICP' realizada com sucesso!
+2026-09-05 08:03:15,879 - INFO - Devolução realizada com sucesso!
+Nome: Carla
+CPF: 999.***.***-66
+Tipo: funcionario
+2026-09-05 08:03:15,879 - INFO - Quantidade de livros restantes na estante: 3

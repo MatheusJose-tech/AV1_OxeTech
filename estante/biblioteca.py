@@ -1,6 +1,7 @@
 import datetime
 from estante import banco
 from livros.modelos import Estante
+from seguranca.operador import seguranca_operador
 class Usuario:
     def __init__(self, id_usuario, nome, cpf, email, tipo):
         self.id = id_usuario
@@ -18,14 +19,13 @@ class Biblioteca():
         self.livros = {}
         self.emprestimos = []
         self.estante = Estante()
+        self.operador = seguranca_operador(self)
         
 
-    def mascarar_cpf(self, cpf):
-            return f"{cpf[:3]}.***.***-{cpf[-2:]}"
       
     def adicionar_usuario(self, id_usuario, nome, cpf, email, tipo):
 
-        novo_usuario = Usuario(id_usuario, nome, self.mascarar_cpf(cpf), email, tipo)
+        novo_usuario = Usuario(id_usuario, nome, self.operador.mascarar_cpf(cpf), self.operador.mascarar_email(email), tipo)
         self.usuarios[id_usuario] = novo_usuario
 
     def adicionar_livro_na_biblioteca(self, id_livro, titulo, autor, categoria, quantidade):
@@ -39,20 +39,19 @@ class Biblioteca():
         livro = self.livros.get(id_livro)
 
         if usuario.bloqueado:
-            print(f"Usuário {usuario.nome} está bloqueado e não pode realizar empréstimos.")
-            return
+            return self.operador.mensagem_warning(f"Usuário {usuario.nome} está bloqueado e não pode realizar empréstimos.")
+            
         
         if usuario is None:
-            print(f"Usuário com ID {id} não encontrado.")
-            return   
+            return self.operador.mensagem_erro(f"Usuário com ID {id} não encontrado.")
+            
 
         if livro is None:
-            print(f"Livro com ID {id_livro} não encontrado.")
-            return
+            return self.operador.mensagem_erro(f"Livro com ID {id_livro} não encontrado.")
 
         if livro.quantidade <= 0:
-            print(f"Não há exemplares disponíveis do livro '{livro.titulo}'.")
-            return
+            return self.operador.mensagem_info(f"Não há exemplares disponíveis do livro '{livro.titulo}'.")
+            
 
              
         tipos = banco.TIPOS
@@ -68,17 +67,17 @@ class Biblioteca():
             if self.estante.efetivar_emprestimo(id_livro):
 
                     usuario.emprestimos_ativos += 1
-                    prazo = banco.prazo[usuario.tipo]  
+                    prazo = banco.PRAZO[usuario.tipo]  
 
                     vencimento = datetime.date.today() + datetime.timedelta(days=prazo)
                     vencimento_str = vencimento.strftime("%d/%m/%Y")
 
                     self.emprestimos.append({"usuario": usuario.id, "livro": livro.id, "vencimento": vencimento_str})
 
-                    print(f"Empréstimo realizado com sucesso!\nNome: {usuario.nome}\nCPF: {usuario.cpf}\nTipo: {usuario.tipo}\nVencimento: {vencimento_str}")
-                    print(f"Quantidade de livros restantes na estante: {livro.quantidade}")
+                    self.operador.mensagem_info(f"Empréstimo realizado com sucesso!\nNome: {usuario.nome}\nCPF: {usuario.cpf}\nTipo: {usuario.tipo}\nVencimento: {vencimento_str}")
+                    self.operador.mensagem_info(f"Quantidade de livros restantes na estante: {livro.quantidade}")
         else:
-            print("Limite de empréstimos atingido.")
+            self.operador.mensagem_warning("Limite de empréstimos atingido.")
 
     def devolver(self, id_usuario, id_livro):
 
@@ -86,13 +85,13 @@ class Biblioteca():
         livro = self.livros.get(id_livro)
 
         if usuario is None:
-            print(f"Usuário com ID {id_usuario} não encontrado.")
+            self.operador.mensagem_erro(f"Usuário com ID {id_usuario} não encontrado.")
             return
 
         if livro is None:
-            print(f"Livro com ID {id_livro} não encontrado.")
+            self.operador.mensagem_erro(f"Livro com ID {id_livro} não encontrado.")
             return
-        print(f"Processando devolução: usuário {usuario.nome}\nCPF: {usuario.cpf}\nlivro: {livro.titulo}\nID: {id_livro}")
+        self.operador.mensagem_info(f"Processando devolução: usuário {usuario.nome}\nCPF: {usuario.cpf}\nlivro: {livro.titulo}\nID: {id_livro}")
         empestimo_encontrado = None
 
         for emprestimo in self.emprestimos:
@@ -101,7 +100,7 @@ class Biblioteca():
                 break
 
         if empestimo_encontrado is None:
-            print(f"Não há empréstimos ativos para o usuário {usuario.nome} com o livro '{livro.titulo}'.")
+            self.operador.mensagem_erro(f"Não há empréstimos ativos para o usuário {usuario.nome} com o livro '{livro.titulo}'.")
             return
         
         data_hoje = datetime.date.today()
@@ -111,12 +110,12 @@ class Biblioteca():
         if data_hoje > vencimento_formatado:
 
             dias_atraso = (data_hoje - vencimento_formatado).days
-            print(f"Devolução atrasada em {dias_atraso} dias.")
-            print(f"Aplicando multa...")
+            self.operador.mensagem_warning(f"Devolução atrasada em {dias_atraso} dias.")
+            self.operador.mensagem_info(f"Aplicando multa...")
 
             multa = banco.MULTAS[usuario.tipo] * dias_atraso
-            print(f"Valor da multa: R$ {multa:.2f}")
-            print(f"Prosseguindo com a devolução do livro '{livro.titulo}'...")   
+            self.operador.mensagem_info(f"Valor da multa: R$ {multa:.2f}")
+            self.operador.mensagem_info(f"Prosseguindo com a devolução do livro '{livro.titulo}'...")   
 
         if usuario.emprestimos_ativos > 0:
 
@@ -125,9 +124,31 @@ class Biblioteca():
                 usuario.emprestimos_ativos -= 1
                 self.emprestimos.remove(empestimo_encontrado)
 
-                print(f"Devolução realizada com sucesso!\nNome: {usuario.nome}\nCPF: {usuario.cpf}\nTipo: {usuario.tipo}")
-                print(f"Quantidade de livros restantes na estante: {livro.quantidade}")
+                self.operador.mensagem_info(f"Devolução realizada com sucesso!\nNome: {usuario.nome}\nCPF: {usuario.cpf}\nTipo: {usuario.tipo}")
+                self.operador.mensagem_info(f"Quantidade de livros restantes na estante: {livro.quantidade}")
         else:
-            print("O usuário não possui empréstimos ativos para devolver.")
+            self.operador.mensagem_info("O usuário não possui empréstimos ativos para devolver.")
 
 
+    def reservar_livro(self, id_usuario, id_livro):
+
+        usuario = self.usuarios.get(id_usuario)
+        livro = self.livros.get(id_livro)
+
+        if usuario is None:
+            self.operador.mensagem_erro(f"Usuário com ID {id_usuario} não encontrado.")
+            return
+
+        if livro is None:
+            self.operador.mensagem_erro(f"Livro com ID {id_livro} não encontrado.")
+            return
+
+        if livro.quantidade == 0:
+            self.operador.mensagem_info(f"Livro '{livro.titulo}' está esgotado. Processando reserva para o usuário {usuario.nome}...")
+            self.operador.mensagem_info(f"Reserva do livro '{livro.titulo}' realizada com sucesso para o usuário {usuario.nome}.")
+        else:
+            self.operador.mensagem_info(f"Livro '{livro.titulo}' está disponível. Nenhuma reserva necessária.")
+            
+
+        
+        

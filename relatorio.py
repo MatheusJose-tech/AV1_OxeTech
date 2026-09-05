@@ -1,24 +1,39 @@
+from seguranca.operador import seguranca_operador
 class Relatorio:
         def __init__(self, biblioteca):
             self.biblioteca = biblioteca
+            self.operador = seguranca_operador()
             
         
         def gerar_relatorio(self):
 
-            print("Relatórios de Livros:")
+            self.operador.mensagem_info("Relatórios de Livros:")
             for id_livro, livro in self.biblioteca.livros.items():
-                print(f"Livro: {livro.titulo} (ID: {id_livro})")
-                print(f"Autor: {livro.autor}")
-                print(f"Categoria: {livro.categoria}")
-                print(f"Quantidade em Estoque: {livro.quantidade}")
+                self.operador.mensagem_info(f"Livro: {livro.titulo} (ID: {id_livro})")
+                self.operador.mensagem_info(f"Autor: {livro.autor}")
+                self.operador.mensagem_info(f"Categoria: {livro.categoria}")
+                self.operador.mensagem_info(f"Quantidade em Estoque: {livro.quantidade}")
                 print("-" * 30)
+
             print()
-            print()
-            print("Relatório de Empréstimos:")
+        
+            self.operador.mensagem_info("Relatório de Empréstimos:")
             for id_usuario, usuario in self.biblioteca.usuarios.items():
-                print(f"Usuário: {usuario.nome} (ID: {id_usuario})")
-                print(f"Tipo: {usuario.tipo}")
-                print(f"Empréstimos Ativos: {usuario.emprestimos_ativos}")
-                print(f"Bloqueado: {'Sim' if usuario.bloqueado else 'Não'}")
-                print(f"Multa: R${usuario.multa:.2f}")
+                self.operador.mensagem_info(f"Usuário: {usuario.nome} (ID: {id_usuario})")
+                self.operador.mensagem_info(f"Tipo: {usuario.tipo}")
+                self.operador.mensagem_info(f"Empréstimos Ativos: {usuario.emprestimos_ativos}")
+                self.operador.mensagem_info(f"Bloqueado: {'Sim' if usuario.bloqueado else 'Não'}")
+                self.operador.mensagem_info(f"Multa: R${usuario.multa:.2f}")
                 print("-" * 30)
+
+        def gerar_relatorio_resumido(self):
+
+            total_usuarios = len(self.biblioteca.usuarios)
+            total_livros = len(self.biblioteca.livros)
+            total_emprestimos = len(self.biblioteca.emprestimos)
+            livros_disponiveis = sum(livro.quantidade for livro in self.biblioteca.livros.values())
+
+            self.operador.mensagem_info("Relatório Resumido:")
+            self.operador.mensagem_info(f"Total de Usuários: {total_usuarios}")
+            self.operador.mensagem_info(f"Total de Livros:{total_livros - livros_disponiveis} |{livros_disponiveis}")
+            self.operador.mensagem_info(f"Total de Empréstimos Ativos: {total_emprestimos}")

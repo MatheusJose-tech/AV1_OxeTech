@@ -1,3 +1,4 @@
+from seguranca.operador import seguranca_operador
 class Livros:
     def __init__(self, id_livro, titulo, autor, categoria, quantidade):
         self.titulo = titulo
@@ -10,6 +11,7 @@ class Estante():
     
     def __init__(self):
         self.livros = []
+        self.operador = seguranca_operador(self)
 
     def adicionar_livro(self, id_livro, titulo, autor, categoria, quantidade):
 
@@ -23,12 +25,12 @@ class Estante():
             if livro.id == id_livro:
                 if livro.quantidade > 0:
                     livro.quantidade -= 1
-                    print(f"Empréstimo do livro '{livro.titulo}' realizado com sucesso!")
+                    self.operador.mensagem_info(f"Empréstimo do livro '{livro.titulo}' realizado com sucesso!")
                     return True
                 else:
-                    print(f"Não há exemplares disponíveis do livro '{livro.titulo}'.")
+                    self.operador.mensagem_info(f"Não há exemplares disponíveis do livro '{livro.titulo}'.")
                     return False
-        print(f"Livro com ID {id_livro} não encontrado na estante.")
+        self.operador.mensagem_erro(f"Livro com ID {id_livro} não encontrado na estante.")
         return False
 
     def efetivar_devolucao(self, id_livro):
@@ -38,10 +40,10 @@ class Estante():
                 if livro.id == id_livro:
                     if livro.quantidade >= 0:
                         livro.quantidade += 1
-                        print(f"Devolução do livro '{livro.titulo}' realizada com sucesso!")
+                        self.operador.mensagem_info(f"Devolução do livro '{livro.titulo}' realizada com sucesso!")
                         return True
                     
-            print(f"Livro com ID {id_livro} não encontrado na estante.")
+            self.operador.mensagem_erro(f"Livro com ID {id_livro} não encontrado na estante.")
             return False
     
 

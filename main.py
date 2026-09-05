@@ -84,3 +84,4 @@ if __name__ == "__main__":
     print("========== CENARIO 6: relatorio final ==========")
     relatorio = Relatorio(biblioteca)
     relatorio.gerar_relatorio()
+    relatorio.gerar_relatorio_resumido()

@@ -2,7 +2,7 @@ from seguranca.operador import seguranca_operador
 class Relatorio:
         def __init__(self, biblioteca):
             self.biblioteca = biblioteca
-            self.operador = seguranca_operador()
+            self.operador = seguranca_operador(self.biblioteca)
             
         
         def gerar_relatorio(self):
@@ -14,9 +14,7 @@ class Relatorio:
                 self.operador.mensagem_info(f"Categoria: {livro.categoria}")
                 self.operador.mensagem_info(f"Quantidade em Estoque: {livro.quantidade}")
                 print("-" * 30)
-
-            print()
-        
+   
         def gerar_relatorio_resumido(self):
 
             total_usuarios = len(self.biblioteca.usuarios)
@@ -24,7 +22,7 @@ class Relatorio:
             total_emprestimos = len(self.biblioteca.emprestimos)
             livros_disponiveis = sum(livro.quantidade for livro in self.biblioteca.livros.values())
 
-            self.operador.mensagem_info("Relatório Resumido:")
+            self.operador.mensagem_info("Relatório Resumido")
             self.operador.mensagem_info(f"Total de Usuários: {total_usuarios}")
-            self.operador.mensagem_info(f"Total de Livros:{total_livros - livros_disponiveis} |{livros_disponiveis}")
+            self.operador.mensagem_info(f"Total de Livros: {livros_disponiveis - total_livros}|{livros_disponiveis}")
             self.operador.mensagem_info(f"Total de Empréstimos Ativos: {total_emprestimos}")

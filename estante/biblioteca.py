@@ -91,6 +91,7 @@ class Biblioteca():
         if livro is None:
             self.operador.mensagem_erro(f"Livro com ID {id_livro} não encontrado.")
             return
+
         self.operador.mensagem_info(f"Processando devolução: usuário {usuario.nome}\nCPF: {usuario.cpf}\nlivro: {livro.titulo}\nID: {id_livro}")
         empestimo_encontrado = None
 
@@ -123,8 +124,10 @@ class Biblioteca():
         
                 usuario.emprestimos_ativos -= 1
                 self.emprestimos.remove(empestimo_encontrado)
+                self.emprestimos.append({"usuario": usuario.id, "livro": livro.id, "vencimento": empestimo_encontrado["vencimento"], "devolvido": True})
 
                 self.operador.mensagem_info(f"Devolução realizada com sucesso!\nNome: {usuario.nome}\nCPF: {usuario.cpf}\nTipo: {usuario.tipo}")
+                
                 self.operador.mensagem_info(f"Quantidade de livros restantes na estante: {livro.quantidade}")
         else:
             self.operador.mensagem_info("O usuário não possui empréstimos ativos para devolver.")
@@ -151,4 +154,7 @@ class Biblioteca():
             
 
         
-        
+
+
+
+            
